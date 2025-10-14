@@ -10,7 +10,7 @@ services:
       - "27017:27017"
     environment:
       MONGO_INITDB_ROOT_USERNAME: admin
-      MONGO_INITDB_ROOT_PASSWORD: password123
+      MONGO_INITDB_ROOT_PASSWORD: hxg20021126
       MONGO_INITDB_DATABASE: feishu-notes
     volumes:
       - mongodb_data:/data/db
@@ -25,7 +25,7 @@ services:
     restart: unless-stopped
     ports:
       - "6379:6379"
-    command: redis-server --appendonly yes --requirepass redis123
+    command: redis-server --appendonly yes --requirepass hxg20021126
     volumes:
       - redis_data:/data
     networks:
@@ -43,8 +43,8 @@ services:
     environment:
       NODE_ENV: production
       PORT: 3001
-      MONGODB_URI: mongodb://admin:password123@mongodb:27017/feishu-notes?authSource=admin
-      REDIS_URL: redis://:redis123@redis:6379
+      MONGODB_URI: mongodb://admin:hxg20021126@mongodb:27017/feishu-notes?authSource=admin
+      REDIS_URL: redis://:hxg20021126@redis:6379
       JWT_SECRET: your-super-secret-jwt-key-change-this-in-production
       CORS_ORIGIN: http://localhost:3000
     depends_on:
