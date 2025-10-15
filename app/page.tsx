@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Sidebar from '@/components/Sidebar'
 import Editor from '@/components/Editor'
@@ -8,9 +8,11 @@ import Header from '@/components/Header'
 import { useAppStore } from '@/lib/store'
 import { documentsAPI, foldersAPI } from '@/lib/api'
 import socketManager from '@/lib/socket'
+import { parseHtmlToToc, renderTocToUl, type Node } from '@/utils/parse-document'
 
 export default function Home() {
   const router = useRouter()
+  const [toc, setToc] = useState<Node[]>([])
   const { 
     isAuthenticated, 
     user,
@@ -44,6 +46,12 @@ export default function Home() {
       socketManager.disconnect()
     }
   }, [isAuthenticated, user])
+
+  useEffect(() => {
+    console.log(currentDocument);
+    console.log(parseHtmlToToc(currentDocument?.content || ''))
+    console.log(renderTocToUl(parseHtmlToToc(currentDocument?.content || '')));
+  }, [currentDocument])
 
   const loadDocuments = async () => {
     try {
@@ -127,14 +135,22 @@ export default function Home() {
         
         <main className="flex-1 overflow-hidden">
           {currentDocument ? (
-            <Editor key={currentDocument._id} document={currentDocument} />
+            // <Editor key={currentDocument._id} document={currentDocument} />
+            <div className='flex'>
+              <div className='w-1/5'>
+                <div className='w-full h-full bg-gray-50'>目录</div>
+              </div>
+              <div className='flex-1'>
+                <Editor key={currentDocument._id} document={currentDocument} />
+              </div>
+            </div>
           ) : (
             <div className="flex items-center justify-center h-full text-gray-500">
               <div className="text-center">
                 <h2 className="text-2xl font-semibold mb-2">欢迎使用飞书笔记</h2>
                 <p className="mb-4">选择一个文档开始编辑，或创建新文档</p>
                 <button
-                  onClick={handleCreateDocument}
+                  onClick={() => handleCreateDocument()}
                   className="px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors"
                 >
                   创建新文档
