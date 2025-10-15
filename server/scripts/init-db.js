@@ -6,12 +6,9 @@ require('dotenv').config()
 
 const initDatabase = async () => {
   try {
-    // 连接数据库
-    const mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/feishu-notes'
-    await mongoose.connect(mongoURI, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    })
+    // 连接数据库 - 使用带认证的连接字符串
+    const mongoURI = process.env.MONGODB_URI || 'mongodb://admin:hxg20021126@localhost:27017/feishu-notes?authSource=admin'
+    await mongoose.connect(mongoURI)
 
     console.log('✅ 数据库连接成功')
 
@@ -35,8 +32,8 @@ const initDatabase = async () => {
 
     console.log('✅ 索引创建完成')
 
-    // 创建示例数据（仅在开发环境）
-    if (process.env.NODE_ENV === 'development') {
+    // 创建示例数据（开发环境或未设置环境时）
+    if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
       console.log('🌱 创建示例数据...')
 
       // 检查是否已有用户

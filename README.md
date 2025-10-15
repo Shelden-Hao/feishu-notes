@@ -48,10 +48,10 @@ cd ..
 #### 方式一：使用 Docker (推荐)
 ```bash
 # 启动 MongoDB 和 Redis
-docker-compose up -d mongodb redis
+docker compose up -d mongodb redis
 
 # 或使用一键启动脚本
-start-with-docker.bat
+./start-with-docker.sh
 ```
 
 #### 方式二：本地安装
@@ -73,7 +73,7 @@ npm run setup
 #### 方式一：使用 Docker
 ```bash
 # 启动数据库
-docker-compose up -d mongodb redis
+docker compose up -d mongodb redis
 
 # 安装依赖
 npm install
@@ -188,16 +188,16 @@ MIT License
 
 ```bash
 # 完整部署（包含前后端）
-docker-compose up -d
+docker compose up -d
 
 # 仅启动数据库
-docker-compose up -d mongodb redis
+docker compose up -d mongodb redis
 
 # 查看日志
-docker-compose logs -f
+docker compose logs -f
 
 # 停止服务
-docker-compose down
+docker compose down
 ```
 
 ## API 文档

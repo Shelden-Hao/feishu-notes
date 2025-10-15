@@ -4,12 +4,9 @@ const Redis = require('ioredis')
 // MongoDB 连接
 const connectMongoDB = async () => {
   try {
-    const mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/feishu-notes'
+    const mongoURI = process.env.MONGODB_URI || 'mongodb://admin:hxg20021126@localhost:27017/feishu-notes?authSource=admin'
 
-    await mongoose.connect(mongoURI, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    })
+    await mongoose.connect(mongoURI)
 
     console.log('✅ MongoDB 连接成功')
   } catch (error) {
