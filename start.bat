@@ -35,8 +35,8 @@ start "前端应用" cmd /k "npm run dev"
 
 echo.
 echo 应用启动完成！
-echo 前端地址: http://localhost:3000
-echo 后端地址: http://localhost:3001
+echo 前端地址: http://localhost:4000
+echo 后端地址: http://localhost:4001
 echo MongoDB: mongodb://localhost:27017/feishu-notes
 echo Redis: redis://localhost:6379
 echo.

@@ -11,7 +11,7 @@ const app = express()
 const server = http.createServer(app)
 const io = socketIo(server, {
   cors: {
-    origin: "http://localhost:3000",
+    origin: "http://localhost:4000",
     methods: ["GET", "POST"]
   }
 })
@@ -146,13 +146,13 @@ io.on('connection', (socket) => {
   })
 })
 
-const PORT = process.env.PORT || 3001
+const PORT = process.env.PORT || 4001
 
 // 将 redis 实例传递给应用
 app.set('redis', redis)
 
 server.listen(PORT, () => {
   console.log(`🚀 服务器运行在端口 ${PORT}`)
-  console.log(`📝 前端地址: http://localhost:3000`)
+  console.log(`📝 前端地址: http://localhost:4000`)
   console.log(`🔧 API地址: http://localhost:${PORT}/api`)
 })

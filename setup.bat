@@ -123,8 +123,8 @@ start "飞书笔记-前端" cmd /k "npm run dev"
 echo.
 echo 🎉 应用启动完成！
 echo.
-echo 📱 前端地址: http://localhost:3000
-echo 🔧 后端地址: http://localhost:3001
+echo 📱 前端地址: http://localhost:4000
+echo 🔧 后端地址: http://localhost:4001
 echo.
 if "%choice%"=="1" (
     echo 🗄️  MongoDB: mongodb://localhost:27017

@@ -39,14 +39,14 @@ services:
     container_name: feishu-notes-backend
     restart: unless-stopped
     ports:
-      - "3001:3001"
+      - "4001:4001"
     environment:
       NODE_ENV: production
-      PORT: 3001
+      PORT: 4001
       MONGODB_URI: mongodb://admin:hxg20021126@mongodb:27017/feishu-notes?authSource=admin
       REDIS_URL: redis://:hxg20021126@redis:6379
       JWT_SECRET: your-super-secret-jwt-key-change-this-in-production
-      CORS_ORIGIN: http://localhost:3000
+      CORS_ORIGIN: http://localhost:4000
     depends_on:
       - mongodb
       - redis
@@ -64,10 +64,10 @@ services:
     container_name: feishu-notes-frontend
     restart: unless-stopped
     ports:
-      - "3000:3000"
+      - "4000:4000"
     environment:
-      NEXT_PUBLIC_API_URL: http://localhost:3001
-      NEXT_PUBLIC_SOCKET_URL: http://localhost:3001
+      NEXT_PUBLIC_API_URL: http://localhost:4001
+      NEXT_PUBLIC_SOCKET_URL: http://localhost:4001
     depends_on:
       - backend
     networks:

@@ -4,7 +4,6 @@
 
 ## 功能特性
 
-- 🎨 现代化的用户界面
 - ✏️ 富文本编辑器 (基于 Tiptap)
 - 🤝 实时协作编辑
 - 📁 文档管理和组织
@@ -46,64 +45,42 @@ cd ..
 ### 2. 数据库准备
 
 #### 方式一：使用 Docker (推荐)
+
+先手动安装 Docker Desktop 并打开。
+
+然后启动数据库服务(mac)：
+
 ```bash
 # 启动 MongoDB 和 Redis
 docker compose up -d mongodb redis
-
-# 或使用一键启动脚本
-./start-with-docker.sh
 ```
 
-#### 方式二：本地安装
+#### 方式二：本地安装并启动数据库
 - 安装 MongoDB (端口 27017)
 - 安装 Redis (端口 6379)
 
-### 3. 一键启动 (推荐)
+### 3. 项目启动
 
-```bash
-# Windows 用户 - 完整安装和启动
-setup.bat
-
-# 或者使用 npm 命令
-npm run setup
-```
-
-### 4. 手动启动
-
-#### 方式一：使用 Docker
-```bash
-# 启动数据库
-docker compose up -d mongodb redis
-
-# 安装依赖
-npm install
-cd server && npm install && cd ..
-
-# 初始化数据库
+#### 初始化数据库
 cd server && npm run init-db && cd ..
 
-# 启动服务
+#### 启动服务
+```bash
 npm run dev:server  # 后端
 npm run dev         # 前端 (新终端)
 ```
 
-#### 方式二：本地数据库
-```bash
-# 确保 MongoDB 和 Redis 已启动
-# MongoDB: mongodb://localhost:27017
-# Redis: redis://localhost:6379
+### 4. 访问应用
 
-# 安装依赖和启动
-npm install
-cd server && npm install && npm run init-db && npm run dev
-# 新终端: npm run dev
-```
+打开浏览器访问 [http://localhost:4000](http://localhost:4000)
 
-### 3. 访问应用
-
-打开浏览器访问 [http://localhost:3000](http://localhost:3000)
+初始化数据库后会自动创建演示账号：
+- 邮箱：`demo@example.com`
+- 密码：`123456`
 
 ## 项目结构
+
+> 待完善~
 
 ```
 feishu-notes/
@@ -140,20 +117,11 @@ feishu-notes/
 - [x] 协作者管理
 - [x] 全文搜索功能
 - [x] 用户设置页面
-- [x] 一键安装脚本
-- [ ] 移动端优化
+- [x] 文章目录树
 - [ ] 文件上传功能
 - [ ] 导出功能 (PDF/Word)
 
-## 贡献
-
-欢迎提交 Issue 和 Pull Request！
-
-## 许可证
-
-MIT License
-##
- 数据库说明
+## 数据库说明
 
 ### MongoDB 集合结构
 
@@ -177,28 +145,6 @@ MIT License
 - 用户会话缓存
 - 实时协作状态
 - 频繁查询缓存
-
-## 演示账号
-
-初始化数据库后会自动创建演示账号：
-- 邮箱：`demo@example.com`
-- 密码：`123456`
-
-## Docker 部署
-
-```bash
-# 完整部署（包含前后端）
-docker compose up -d
-
-# 仅启动数据库
-docker compose up -d mongodb redis
-
-# 查看日志
-docker compose logs -f
-
-# 停止服务
-docker compose down
-```
 
 ## API 文档
 
@@ -226,3 +172,11 @@ docker compose down
 - `PUT /api/folders/:id` - 更新文件夹
 - `DELETE /api/folders/:id` - 删除文件夹
 - `PUT /api/folders/:id/move` - 移动文件夹
+
+## 贡献
+
+欢迎提交 Issue 和 Pull Request！
+
+## 许可证
+
+MIT License

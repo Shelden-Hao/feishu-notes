@@ -7,7 +7,7 @@ class SocketManager {
   connect(user?: { id: string; name: string; email: string }) {
     if (this.socket?.connected) return this.socket
 
-    this.socket = io(process.env.NEXT_PUBLIC_SOCKET_URL || 'http://localhost:3001', {
+    this.socket = io(process.env.NEXT_PUBLIC_SOCKET_URL || 'http://localhost:4001', {
       transports: ['websocket', 'polling'],
       timeout: 20000,
     })

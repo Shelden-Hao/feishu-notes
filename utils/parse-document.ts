@@ -36,9 +36,15 @@ function parseHtmlToToc(htmlStr: string, options: Options = { selectors: ['h1','
     // 确保 id 存在 (用于链接)
     nodes.forEach((el: HTMLElement, idx: number) => {
       if (!el.id) {
-        // 生成一个安全 id
-        const slug = (el.textContent || 'heading').trim().toLowerCase().replace(/\s+/g,'-').replace(/[^\w-]/g,'');
+        // 生成一个基于内容的安全 id
+        const textContent = (el.textContent || 'heading').trim();
+        const slug = textContent.toLowerCase()
+          .replace(/[\s\u3000]+/g, '-') // 处理空格和中文空格
+          .replace(/[^\w\u4e00-\u9fa5-]/g, '') // 保留字母、数字、中文、连字符
+          .replace(/^-+|-+$/g, ''); // 去除首尾连字符
+        
         let id = slug || `heading-${idx}`;
+        
         // 避免重复 id
         let i = 1;
         while (doc.getElementById(id)) {
@@ -54,7 +60,7 @@ function parseHtmlToToc(htmlStr: string, options: Options = { selectors: ['h1','
   
     nodes.forEach((el: HTMLElement) => {
       const level = getLevel(el as HTMLElement as HTMLElement);
-      const node: Node = { level, title: el.textContent.trim(), id: el.id, children: [] };
+      const node: Node = { level, title: (el.textContent || '').trim(), id: el.id, children: [] };
   
       if (stack.length === 0) {
         root.push(node);
